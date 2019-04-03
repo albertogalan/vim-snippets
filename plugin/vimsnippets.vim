@@ -5,15 +5,15 @@ let b:done_vimsnippets = 1
 
 " Some variables need default value
 if !exists("g:snips_author")
-    let g:snips_author = "yourname"
+    let g:snips_author = "agalan"
 endif
 
 if !exists("g:snips_email")
-    let g:snips_email = "yourname@email.com"
+    let g:snips_email = "info@albertogalan.com"
 endif
 
 if !exists("g:snips_github")
-    let g:snips_github = "https://github.com/yourname"
+    let g:snips_github = "https://github.com/agalan"
 endif
 
 " Expanding the path is not needed on Vim 7.4
@@ -38,7 +38,6 @@ endtry
 if !exists("g:_uspy")
    finish
 end
-
 
 " Expand our path
 let s:SourcedFile=expand("<sfile>")
