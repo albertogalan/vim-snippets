@@ -3,26 +3,6 @@ priority -50
 global !p
 import vim
 
-
-###################
-# CUSTOM SNIPPETS
-###################
-
-
-snippet snip "Insert snipp" b
-This is my ${1:defaultname}
-
-endsnippet
-
-snippet help "Insert Help" b
-if [[ $# -eq 0 ]]; then
-  echo "$red This command   $reset"
-  echo "Usage: ${FUNCNAME[0]} $green {option1} {option2} $reset"
-  return 0
-fi
-
-endsnippet
-	
 # Tests for the existence of a variable declared by Vim's filetype detection
 # suggesting the type of shell script of the current file
 def testShell(scope, shell):
@@ -48,9 +28,9 @@ endglobal
 
 snippet shh
 if [[ $# -eq 0 ]]; then
-  echo "$red ${1:This command'}  $reset"
-  echo "Usage: ${FUNCNAME[0]} $green {${2:arg1}}  $reset"
-  exit 0
+  echo "$red This command  $reset"
+  echo "Usage: ${FUNCNAME[0]} $green {arg1} {arg2} $reset"
+  return 0
 fi
 endsnippet
 snippet #!
@@ -122,12 +102,6 @@ snippet while "while ... (done)"
 while ${2:[[ ${1:condition} ]]}; do
 	${0:#statements}
 done
-endsnippet
-
-snippet whilef "while read file (done)"
-while read f; do
-	#statements
-done < ${0:#file}
 endsnippet
 
 # vim:ft=snippets:

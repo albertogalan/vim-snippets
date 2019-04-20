@@ -22,91 +22,10 @@ from javascript_snippets import (
 )
 endglobal
 
-#########################
-#  Customized snippets  #
-#########################
-snippet zzrequest "nodejs endpoints webserver"
-var express = require('express');
-var app = express();
-request = require('request')
-
-app.get('/${1:'fanyi'}, function(req, res) {
-
-    data = '{"from":"auto"}';
-    data = JSON.parse(data);
-    data.from = req.query.from
-    res.end(JSON.stringgify(data))
-    })
-endsnippet
-
-snippet zzserver "nodejs server"
-var server = app.listen(${1:3000}, function() {
-
-    var host = server.address().address
-    var port = server.address().port
-    console.log("Example app listening at http://%s:%s", host, port)
-})
-endsnippet
-snippet zzrequest "nodejs request"
-var headers = {
-                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.65 Safari/537.36',
-                "content-type": "application/json"}
-
-var url = 'http://$(localhost:3000)'
-var data = {
-    q: query,
-    appid: appid
-};
-
-var options = {
-    url: url,
-    method: "GET",
-    headers: headers,
-    timeout: 4000,
-    json: true,
-    qs: data
-}
-
-request(options, function callback(error, response, body, query) {
-                if (!error && response.statusCode == 200) {
-                    // console.log('callback')
-                    // console.log(body)
-                    var resp = baidu(body)
-                    resolved(resp)
-                } else
-                writetodisk(error)
-                    console.log(error)
-            });
-
-snippet zzrequestuser "Userscript Resquest post get"
-// @grant    GM_xmlhttpRequest
-
-var data = { "key": "value", "key2":"value2" };
-
-function req(url,data){
-
-GM_xmlhttpRequest({
-   method: "GET",
-   url: url + '?' + $.param(data, true),
-   headers: {"Content-Type": "application/x-www-form-urlencoded"},
-   onload: function(res) {
-   
-   // post
-   console.log(res.status)
-   console.log(res.responseText)
-   // get 
-   var data = JSON.parse(res.response);
-
- }
- })
-}
-endsnippet 
-
-
 ###########################################################################
 #                            TextMate Snippets                            #
 ###########################################################################
-snippet zzget "Get Elements"
+snippet get "Get Elements"
 getElement${1/(T)|(C)|.*/(?1:s)(?2:s)/}By${1:T}${1/(T)|(I)|(C).*/(?1:agName)(?2:d)(?3:lassName)/}('$2')
 endsnippet
 
@@ -137,13 +56,13 @@ ${1:class_name}.prototype.${2:method_name} = function`!p snip.rv = space_before_
 
 endsnippet
 
-snippet zzfun "function (named)" b
+snippet fun "function (named)" b
 function ${1:function_name}`!p snip.rv = space_before_function_paren(snip)`(${2:argument}) {
 	${VISUAL}$0
 }
 endsnippet
 
-snippet zzvf "function (assigned to var)"
+snippet vf "function (assigned to var)"
 ${1:var }${2:function_name} = function $2`!p snip.rv = space_before_function_paren(snip)`($3) {
 	${VISUAL}$0
 }`!p snip.rv = semi(snip)`
@@ -151,14 +70,14 @@ endsnippet
 
 # Drop priority so this only triggers when not beginning of line.
 priority -51
-snippet zzfun "function (anonymous)" w
+snippet fun "function (anonymous)" w
 function`!p snip.rv = space_before_function_paren(snip)`($1) {
 	${VISUAL}$0
 }$2
 endsnippet
 priority -50
 
-snippet zzanf "function (anonymous)" i
+snippet anf "function (anonymous)" i
 function`!p snip.rv = space_before_function_paren(snip)`($1) {
 	${VISUAL}$0
 }
@@ -176,13 +95,13 @@ snippet ;fe "Minify safe iife"
 }(${2}))
 endsnippet
 
-snippet zztimeout "setTimeout function"
+snippet timeout "setTimeout function"
 setTimeout(function`!p snip.rv = space_before_function_paren(snip)`() {
 	${VISUAL}$0
 }${2:.bind(${3:this})}, ${1:10})`!p snip.rv = semi(snip)`
 endsnippet
 
-snippet zzfi "for prop in obj using hasOwnProperty" b
+snippet fi "for prop in obj using hasOwnProperty" b
 for`!p snip.rv = keyword_spacing(snip)`(${1:prop} in ${2:obj}){
 	if`!p snip.rv = keyword_spacing(snip)`($2.hasOwnProperty($1)) {
 		${VISUAL}$0
@@ -190,13 +109,13 @@ for`!p snip.rv = keyword_spacing(snip)`(${1:prop} in ${2:obj}){
 }
 endsnippet
 
-snippet zzif "if (condition) { ... }"
+snippet if "if (condition) { ... }"
 if`!p snip.rv = keyword_spacing(snip)`(${1:true}) {
 	${VISUAL}$0
 }
 endsnippet
 
-snippet zzife "if (condition) { ... } else { ... }"
+snippet ife "if (condition) { ... } else { ... }"
 if`!p snip.rv = keyword_spacing(snip)`(${1:true}) {
 	${VISUAL}$0
 }`!p snip.rv = keyword_spacing(snip)`else`!p snip.rv = keyword_spacing(snip)`{
@@ -204,7 +123,7 @@ if`!p snip.rv = keyword_spacing(snip)`(${1:true}) {
 }
 endsnippet
 
-snippet zzswitch "switch case"
+snippet switch
 switch`!p snip.rv = keyword_spacing(snip)`(${VISUAL}${1:expression}) {
 	case '${VISUAL}${3:case}':
 		${4}
@@ -215,13 +134,13 @@ switch`!p snip.rv = keyword_spacing(snip)`(${VISUAL}${1:expression}) {
 }
 endsnippet
 
-snippet zzcase "case 'xyz': ... break"
+snippet case "case 'xyz': ... break"
 case`!p snip.rv = keyword_spacing(snip)`'${VISUAL}${1:case}':
 	${VISUAL}$0
 	break`!p snip.rv = semi(snip)`
 endsnippet
 
-snippet zzdo "do { ... } while (condition)"
+snippet do "do { ... } while (condition)"
 do`!p snip.rv = keyword_spacing(snip)`{
 	${VISUAL}$0
 }`!p snip.rv = keyword_spacing(snip)`while`!p snip.rv = keyword_spacing(snip)`(${1:/* condition */})`!p snip.rv = semi(snip)`
